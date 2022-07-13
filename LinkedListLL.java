@@ -18,6 +18,10 @@ class LinkedListLL {
             size++;
         }
     }
+    
+    
+    
+    
 
     //Insert / Add ==First  and last..
     public void addFirst(String data) {
@@ -30,6 +34,9 @@ class LinkedListLL {
         head   =    newNode ;
         
     }
+    
+    
+    
     //add last
     public void addLast(String data) {
         Node newNode = new Node(data);
@@ -47,7 +54,9 @@ class LinkedListLL {
     }
 
 
-    //Print
+    
+    
+    //Printing the list
     public void printList() {
 
         if(head == null) {
@@ -63,9 +72,10 @@ class LinkedListLL {
 
     }
 
+    
+    
 
-    //Delete
-
+    //Delete from first
     public void deleteFirst() {
         if(head ==  null) {
             System.out.println("The list is empty :");
@@ -77,7 +87,9 @@ class LinkedListLL {
 
     }
 
+    
 
+    //delete from last..
     public void deleteLast(){
         if(head ==  null) {
             System.out.println("The list is empty :");
@@ -101,41 +113,96 @@ class LinkedListLL {
 
 
 
+    
+    
     //size
     public int getSize(){
         return size ;
     }
+    
+    
+    
+    
+    
+    
+    //This function is to reverse LinkedList... using  looop 
+    public void reverseIterate() {
+
+        if(head == null || head.next == null) {
+            return ;
+        }
+        Node prevNode = head;
+        Node currNode = head.next;
+        while(currNode != null){
+            Node  nextNode = currNode.next;
+            currNode.next = prevNode ;
+
+            //update    
+            prevNode = currNode;
+            currNode = nextNode ;
+
+        }
+        head.next  = null ;
+        head = prevNode ;
+    }
+    
+   
+    
+    
+    
+    //This function is to reverse LinkedList using recursion...
+    public Node reverseRecursive(Node head){
+
+
+        if(head ==  null  || head.next == null) {
+            return head ;
+        }
+        Node newhead = reverseRecursive(head.next);
+        head.next.next = head;
+        head.next = null ;
+        return newhead;
+    }
 
 
 
-
-
+    
+    
+    //main function
     public static void main(String agrs[]){ 
         LinkedListLL list =  new LinkedListLL();
+        
+        //for addin in first
         list.addFirst("a");
         list.addFirst("is");
-        list.printList();
-
+        //for adding  in last
         list.addLast("list");
-        list.printList();
-        
-        
         list.addFirst("This");
         list.printList();
         
-        
+        //for deleting 
         list.deleteFirst();
         list.printList();
-        
-        list.deleteLast();
+        //delete
+        list.deleteLast(); 
         list.printList();
 
-        System.out.println( list.getSize());
+        System.out.println( list.getSize());//get size or number of list in a LinkedList...
         
         
         list.addFirst("Hello");
         list.printList();
         System.out.println( list.getSize());
+        
+        
+        
+        //for reverse.. using iterate
+        list.reverseIterate();
+        list.printList();
+        
+        //for reverse using reccursion...
+        list.head = list.reverseRecursive(list.head);
+        list.printList();
+        
 
     }
     
